@@ -1,19 +1,44 @@
-local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
-local Highlight = Instance.new("Highlight")
-Highlight.Name = "Highlight"
-function ApplyToCurrentPlayers()
-   for i,player in pairs(Players:GetChildren()) do
-      repeat wait() until player.Character
-      if not player.Character:FindFirstChild("HumanoidRootPart"):FindFirstChild("Highlight") then
-         local HighlightClone = Highlight:Clone()
-         HighlightClone.Adornee = player.Character
-         HighlightClone.Parent = player.Character:FindFirstChild("HumanoidRootPart")
-         HighlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
-         HighlightClone.Name = "Highlight"
-      end
-   end
-end
-RunService.Heartbeat:Connect(function()
-   ApplyToCurrentPlayers()
-end)
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("TNF - Trocação na Favela - VERSÃO GRATIS", "BloodTheme")
+    -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("Aimbot", "Puxa sua mira em todos", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Aimbot-Script/main/Aimbot%20Script.lua"))()
+    end)
+
+    MainSection:NewButton("Infinite Yield", "Comandos de Administrador", function()
+        loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
+    end)
+
+    --LOCAL PLAYER
+    local Player = Window:NewTab("Player")
+    local PlayerSection = Player:NewSection("Player")
+
+    PlayerSection:NewSlider("Velocidade", "Muda sua velocidade", 500, 16, function(s)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+    end)
+
+    PlayerSection:NewSlider("Pulo", "Muda seu pulo", 350, 50, function(s)
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
+    end)
+
+    PlayerSection:NewButton("Tudo ao normal", "Volta tudo ao normal", function()
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+    end)
+    
+
+    --- Credits
+    local Credit = Window:NewTab("Creditos")
+    local CreditSection = Credit:NewSection("Creditos")
+    local CreditSection = Credit:NewSection("CooltDragon Owner")
+    local CreditSection = Credit:NewSection("Rina Co-Owner")
+    local CreditSection = Credit:NewSection("https://discord.gg/xnTdB9SxK")
+
+    --CONFIGS
+    local Configurar = Window:NewTab("Configurações")
+        ConfigurarSection:NewButton("Fechar Script", "Fecha Script", function()
+        Destroy()
+    end)
